@@ -144,3 +144,19 @@ class Test5Route extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [Test6Screen]
+class Test6Route extends PageRouteInfo<void> {
+  const Test6Route({List<PageRouteInfo>? children})
+    : super(Test6Route.name, initialChildren: children);
+
+  static const String name = 'Test6Route';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const Test6Screen();
+    },
+  );
+}
