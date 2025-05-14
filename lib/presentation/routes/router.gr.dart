@@ -112,3 +112,35 @@ class Test3Route extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [Test4Screen]
+class Test4Route extends PageRouteInfo<void> {
+  const Test4Route({List<PageRouteInfo>? children})
+    : super(Test4Route.name, initialChildren: children);
+
+  static const String name = 'Test4Route';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const Test4Screen();
+    },
+  );
+}
+
+/// generated route for
+/// [Test5Screen]
+class Test5Route extends PageRouteInfo<void> {
+  const Test5Route({List<PageRouteInfo>? children})
+    : super(Test5Route.name, initialChildren: children);
+
+  static const String name = 'Test5Route';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const Test5Screen();
+    },
+  );
+}
