@@ -160,3 +160,19 @@ class Test6Route extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [Test7Screen]
+class Test7Route extends PageRouteInfo<void> {
+  const Test7Route({List<PageRouteInfo>? children})
+    : super(Test7Route.name, initialChildren: children);
+
+  static const String name = 'Test7Route';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const Test7Screen();
+    },
+  );
+}

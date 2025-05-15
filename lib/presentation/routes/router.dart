@@ -9,6 +9,7 @@ import 'package:nastya_diplom/presentation/screens/test_3/test_3_screen.dart';
 import 'package:nastya_diplom/presentation/screens/test_4/test_4_screen.dart';
 import 'package:nastya_diplom/presentation/screens/test_5/test_5_screen.dart';
 import 'package:nastya_diplom/presentation/screens/test_6/test_6_screen.dart';
+import 'package:nastya_diplom/presentation/screens/test_7/test_7_screen.dart';
 
 export 'package:auto_route/auto_route.dart';
 
@@ -53,10 +54,10 @@ class AppRouter extends RootStackRouter {
           page: Test6Route.page,
           path: '/test6',
         ),
-        // CustomRoute(
-        //   page: Test1Route.page,
-        //   path: 'application/test7',
-        // ),
+        CustomRoute(
+          page: Test7Route.page,
+          path: '/test7',
+        ),
         // CustomRoute(
         //   page: Test1Route.page,
         //   path: 'application/test8',

@@ -53,7 +53,7 @@ extension TestTypeX on TestType {
       case TestType.test6:
         return const Test6Route();
       case TestType.test7:
-        return Test1Route();
+        return const Test7Route();
       case TestType.test8:
         return Test1Route();
       case TestType.test9:

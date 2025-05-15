@@ -5,13 +5,22 @@ class Test6Form extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<Test6Bloc>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final bloc = context.read<Test6Bloc>();
       bloc.timer.start();
     });
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Тест "Перепутанные линии"')),
+      appBar: AppBar(
+        title: const Text('Тест "Перепутанные линии"'),
+        leading: IconButton(
+          onPressed: () {
+            bloc.add(const Test6Event.cancel());
+            context.router.replaceAll([SelectionRoute()]);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+      ),
       floatingActionButton: const _FloatingControlButton(),
       body: BlocListener<Test6Bloc, Test6State>(
         listenWhen: (p, c) => p.shouldNavigate != c.shouldNavigate,

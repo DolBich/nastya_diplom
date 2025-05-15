@@ -284,7 +284,155 @@
     ]
   },
   "test7dataHistory": {
-    "test7": null
+    "test7": [
+      {
+        "data": {
+          "errorsCount": 2,
+          "duration": 33873863
+        },
+        "date": "2025-05-15T21:46:23.319355"
+      },
+      {
+        "data": {
+          "errorsCount": 1,
+          "duration": 28605771
+        },
+        "date": "2025-05-15T21:48:09.396296"
+      },
+      {
+        "data": {
+          "errorsCount": 0,
+          "duration": 120065722
+        },
+        "date": "2025-05-15T21:59:56.453626"
+      },
+      {
+        "data": {
+          "errorsCount": 0,
+          "duration": 39982582
+        },
+        "date": "2025-05-15T22:04:58.673360"
+      },
+      {
+        "data": {
+          "errorsCount": 10,
+          "duration": 116195284
+        },
+        "date": "2025-05-15T22:14:46.434188"
+      },
+      {
+        "data": {
+          "errorsCount": 6,
+          "duration": 55664662
+        },
+        "date": "2025-05-15T22:22:18.050663"
+      },
+      {
+        "data": {
+          "errorsCount": 4,
+          "duration": 26553842
+        },
+        "date": "2025-05-15T22:22:48.369160"
+      },
+      {
+        "data": {
+          "errorsCount": 4,
+          "duration": 25397621
+        },
+        "date": "2025-05-15T22:24:13.066136"
+      },
+      {
+        "data": {
+          "errorsCount": 4,
+          "duration": 37555399
+        },
+        "date": "2025-05-15T22:25:27.581670"
+      },
+      {
+        "data": {
+          "errorsCount": 8,
+          "duration": 19597318
+        },
+        "date": "2025-05-15T22:26:19.375840"
+      },
+      {
+        "data": {
+          "errorsCount": 4,
+          "duration": 20972129
+        },
+        "date": "2025-05-15T22:28:46.112324"
+      },
+      {
+        "data": {
+          "errorsCount": 4,
+          "duration": 20717289
+        },
+        "date": "2025-05-15T22:34:24.704485"
+      },
+      {
+        "data": {
+          "errorsCount": 4,
+          "duration": 20729510
+        },
+        "date": "2025-05-15T22:34:24.712421"
+      },
+      {
+        "data": {
+          "errorsCount": 17,
+          "duration": 120000925
+        },
+        "date": "2025-05-15T22:36:37.032111"
+      },
+      {
+        "data": {
+          "errorsCount": 17,
+          "duration": 120001328
+        },
+        "date": "2025-05-15T22:36:37.033138"
+      },
+      {
+        "data": {
+          "errorsCount": 7,
+          "duration": 22112927
+        },
+        "date": "2025-05-15T22:37:49.144846"
+      },
+      {
+        "data": {
+          "errorsCount": 7,
+          "duration": 22129198
+        },
+        "date": "2025-05-15T22:37:49.155813"
+      },
+      {
+        "data": {
+          "errorsCount": 18,
+          "duration": 120073631
+        },
+        "date": "2025-05-15T23:04:16.325325"
+      },
+      {
+        "data": {
+          "errorsCount": 18,
+          "duration": 120075518
+        },
+        "date": "2025-05-15T23:04:16.327284"
+      },
+      {
+        "data": {
+          "errorsCount": 9,
+          "duration": 34476904
+        },
+        "date": "2025-05-15T23:07:24.158069"
+      },
+      {
+        "data": {
+          "errorsCount": 9,
+          "duration": 34477228
+        },
+        "date": "2025-05-15T23:07:24.159040"
+      }
+    ]
   },
   "test8dataHistory": {
     "test8": null

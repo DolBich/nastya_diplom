@@ -7,7 +7,6 @@ import 'package:nastya_diplom/application/app_data/app_data_bloc.dart';
 import 'package:nastya_diplom/application/selection/selection_bloc.dart';
 import 'package:nastya_diplom/application/timer.dart';
 import 'package:nastya_diplom/domain/data/test_data.dart';
-import 'package:nastya_diplom/domain/test_5/test_5_cell.dart';
 import 'package:nastya_diplom/domain/test_6/test_6_unit.dart';
 import 'package:nastya_diplom/infrastructure/enum.dart';
 
