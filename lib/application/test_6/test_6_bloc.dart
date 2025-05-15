@@ -56,8 +56,12 @@ class Test6Bloc extends Bloc<Test6Event, Test6State> {
   }
 
   Future<void> _updateRemainingTime(_UpdateRemainingTime event, Emitter<Test6State> emit) async {
+    final updatedTime = 7*60 - timer.duration.inSeconds;
+    if(updatedTime <= 0) {
+      add(const Test6Event.complete());
+    }
     emit(state.copyWith(
-      remainingTime: state.remainingTime - timer.duration.inSeconds,
+      remainingTime: updatedTime,
     ));
   }
 

@@ -37,5 +37,6 @@ class ConnectionLine with EquatableMixin {
         answer,
         path,
         controlPoints,
+        rightIndex,
       ];
 }

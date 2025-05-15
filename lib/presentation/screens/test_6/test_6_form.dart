@@ -5,6 +5,11 @@ class Test6Form extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final bloc = context.read<Test6Bloc>();
+      bloc.timer.start();
+    });
+
     return Scaffold(
       appBar: AppBar(title: const Text('Тест "Перепутанные линии"')),
       floatingActionButton: const _FloatingControlButton(),
@@ -27,15 +32,152 @@ class Test6Form extends StatelessWidget {
   }
 }
 
+class _MainContent extends StatelessWidget {
+  const _MainContent();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<Test6Bloc, Test6State>(
+      buildWhen: (prev, curr) => prev.isCompleted != curr.isCompleted,
+      builder: (context, state) {
+        return ListView(
+          children: const [
+            _LinesGrid(),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _LinesGrid extends StatelessWidget {
+  const _LinesGrid();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const _NumberColumn(isLeft: true),
+        SizedBox(
+          width: 500,
+          child: BlocBuilder<Test6Bloc, Test6State>(
+              buildWhen: (p, c) => p.isCursorVisible != c.isCursorVisible || p.isCompleted != c.isCompleted,
+              builder: (context, state) {
+                final showCursor = state.isCompleted || state.isCursorVisible;
+                return MouseRegion(
+                  cursor: showCursor ? MouseCursor.defer : SystemMouseCursors.none,
+                  onEnter: (_) {
+                    context.read<Test6Bloc>().add(const Test6Event.toggleCursor());
+                  },
+                  onExit: (_) {
+                    context.read<Test6Bloc>().add(const Test6Event.toggleCursor());
+                  },
+                  child: BlocBuilder<Test6Bloc, Test6State>(
+                      buildWhen: (p, c) => p.lines != c.lines || p.isCompleted != c.isCompleted,
+                      builder: (context, state) {
+                        return CustomPaint(
+                          size: const Size(500, 25 * 25),
+                          painter: _LinesPainter(lines: state.lines, isCompleted: state.isCompleted),
+                        );
+                      }),
+                );
+              }),
+        ),
+        const _NumberColumn(isLeft: false),
+      ],
+    );
+  }
+}
+
+class _LinesPainter extends CustomPainter {
+  final List<ConnectionLine> lines;
+  final bool isCompleted;
+
+  const _LinesPainter({required this.lines, required this.isCompleted});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final defaultPaint = Paint()
+      ..color = Colors.black
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+
+    for (final line in lines) {
+      _configPaint(defaultPaint, line);
+
+      canvas.drawPath(line.path, defaultPaint);
+    }
+  }
+
+  void _configPaint(Paint paint, ConnectionLine line) {
+    if (!isCompleted) {
+      return;
+    }
+    if (line.isError) {
+      paint.color = Colors.red;
+    } else {
+      paint.color = Colors.green;
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}
+
+class _NumberColumn extends StatelessWidget {
+  final bool isLeft;
+
+  const _NumberColumn({required this.isLeft});
+
+  Widget _intForm(BuildContext context, int rightIndex) {
+    final bloc = context.read<Test6Bloc>();
+    return SizedBox(
+      height: 25,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 18.0),
+        child: BlocTextFieldInt<Test6Bloc, Test6State>(
+          bloc: bloc,
+          decoration: const InputDecoration(isDense: true, border: InputBorder.none),
+          stateValue: (state) {
+            return state.lines.firstWhere((e) => e.rightIndex == rightIndex + 1).answer;
+          },
+          onChanged: (v) => bloc.add(Test6Event.updateAnswer(rightIndex: rightIndex + 1, answer: (v ?? 0))),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 60,
+      child: Column(
+        children: List.generate(25, (i) {
+          return Container(
+            height: 25,
+            alignment: Alignment.center,
+            // margin: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.blue),
+            ),
+            child: isLeft ? Text('${i + 1}') : _intForm(context, i),
+          );
+        }),
+      ),
+    );
+  }
+}
+
 class _TimerPanel extends StatelessWidget {
   const _TimerPanel();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<Test6Bloc, Test6State>(
-      buildWhen: (p, c) =>
-      p.remainingTime != c.remainingTime ||
-          p.isCompleted != c.isCompleted,
+      buildWhen: (p, c) => p.remainingTime != c.remainingTime || p.isCompleted != c.isCompleted,
       builder: (context, state) {
         final remaining = state.remainingTime;
         final minutes = (remaining ~/ 60).toString().padLeft(2, '0');
@@ -66,16 +208,16 @@ class _TimerPanel extends StatelessWidget {
                     duration: const Duration(milliseconds: 300),
                     child: state.isCompleted
                         ? const Text(
-                      'Завершено',
-                      style: TextStyle(color: Colors.green),
-                    )
+                            'Завершено',
+                            style: TextStyle(color: Colors.green),
+                          )
                         : Text(
-                      '$minutes:$seconds',
-                      style: TextStyle(
-                        color: _getTimeColor(remaining),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                            '$minutes:$seconds',
+                            style: TextStyle(
+                              color: _getTimeColor(remaining),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                   ),
                 ],
               ),
@@ -115,146 +257,6 @@ class _FloatingControlButton extends StatelessWidget {
           icon: Icon(state.isCompleted ? Icons.arrow_forward : Icons.check),
         );
       },
-    );
-  }
-}
-
-class _MainContent extends StatelessWidget {
-  const _MainContent();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<Test6Bloc, Test6State>(
-      buildWhen: (prev, curr) => prev.isCompleted != curr.isCompleted,
-      builder: (context, state) {
-        return Stack(
-          children: [
-            const _LinesGrid(),
-            if (state.isCompleted) _ResultsOverlay(),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _ResultsOverlay extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final bloc = context.read<Test6Bloc>();
-    return Container(
-      color: Colors.white.withOpacity(0.9),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Правильно: ${25 - bloc.state.errors}'),
-          Text('Ошибки: ${bloc.state.errors}'),
-          const SizedBox(height: 20),
-          const Text('Нажмите "Продолжить" для выхода'),
-        ],
-      ),
-    );
-  }
-}
-
-class _LinesGrid extends StatelessWidget {
-  const _LinesGrid();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<Test6Bloc, Test6State>(
-      buildWhen: (p, c) => p.lines != c.lines && p.isCompleted != c.isCompleted,
-      builder: (context, state) {
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const _NumberColumn(isLeft: true),
-            SizedBox(
-              width: 500,
-              child: MouseRegion(
-                onHover: (_) => context.read<Test6Bloc>().add(const Test6Event.toggleCursor()),
-                child: CustomPaint(
-                  painter: _LinesPainter(lines: state.lines, isCompleted: state.isCompleted),
-                ),
-              ),
-            ),
-            const _NumberColumn(isLeft: false),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _LinesPainter extends CustomPainter {
-  final List<ConnectionLine> lines;
-  final bool isCompleted;
-
-  const _LinesPainter({required this.lines, required this.isCompleted});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final correctPaint = Paint()
-      ..color = Colors.green
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
-
-    final wrongPaint = Paint()
-      ..color = Colors.red
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
-
-    final defaultPaint = Paint()
-      ..color = Colors.black
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
-
-    for (final line in lines) {
-      final paint = !isCompleted
-          ? defaultPaint
-          : line.isError
-              ? wrongPaint
-              : correctPaint;
-
-      canvas.drawPath(line.path, paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
-}
-
-class _NumberColumn extends StatelessWidget {
-  final bool isLeft;
-
-  const _NumberColumn({required this.isLeft});
-
-  Widget _intForm(BuildContext context, int rightIndex) {
-    final bloc = context.read<Test6Bloc>();
-    return BlocTextFieldInt<Test6Bloc, Test6State>(
-      bloc: bloc,
-      stateValue: (state) => state.lines.firstWhere((e) => e.rightIndex == rightIndex).answer,
-      onChanged: (v) => bloc.add(Test6Event.updateAnswer(rightIndex: rightIndex, answer: (v ?? 0) + 1)),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 60,
-      child: ListView.builder(
-        itemCount: 25,
-        itemBuilder: (_, i) => Container(
-          height: 25,
-          alignment: Alignment.center,
-          margin: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.blue),
-          ),
-          child: isLeft ? Text('${i + 1}') : _intForm(context, i),
-        ),
-      ),
     );
   }
 }
