@@ -31,7 +31,6 @@ class AppRouter extends RootStackRouter {
           path: '/',
         ),
 
-        /// TODO
         CustomRoute(
           page: Test1Route.page,
           path: '/test1',
@@ -68,6 +67,7 @@ class AppRouter extends RootStackRouter {
           page: Test9Route.page,
           path: '/test9',
         ),
+
         CustomRoute(
           page: ProfileRoute.page,
           path: '/profile',

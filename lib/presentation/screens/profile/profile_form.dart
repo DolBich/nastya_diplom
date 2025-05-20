@@ -57,7 +57,7 @@ class ProfileForm extends StatelessWidget {
             onPressed: enableSave
                 ? () {
                     bloc.add(const ProfileEvent.save());
-                    context.router.maybePop();
+                    context.router.replaceAll([SelectionRoute()]);
                   }
                 : null,
           ),

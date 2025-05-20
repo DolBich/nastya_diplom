@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nastya_diplom/application/app_history/app_history_bloc.dart';
 import 'package:nastya_diplom/application/selection/selection_bloc.dart';
 import 'package:nastya_diplom/infrastructure/enum.dart';
 import 'package:nastya_diplom/presentation/routes/router.dart';
@@ -17,6 +18,10 @@ class SelectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<AppHistoryBloc>();
+    if(bloc.state.profile == null) {
+      context.router.replaceAll([const ProfileRoute()]);
+    }
     return BlocProvider<SelectionBloc>(
       create: (_) => SelectionBloc(),
       child: Builder(builder: (context) {
