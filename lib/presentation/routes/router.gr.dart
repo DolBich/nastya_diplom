@@ -192,3 +192,19 @@ class Test8Route extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [Test9Screen]
+class Test9Route extends PageRouteInfo<void> {
+  const Test9Route({List<PageRouteInfo>? children})
+    : super(Test9Route.name, initialChildren: children);
+
+  static const String name = 'Test9Route';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const Test9Screen();
+    },
+  );
+}

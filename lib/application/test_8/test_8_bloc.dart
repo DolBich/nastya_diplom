@@ -53,10 +53,6 @@ class Test8Bloc extends Bloc<Test8Event, Test8State> {
 
     // Запускаем фоновое воспроизведение
     add(const Test8Event.playNextBackground());
-
-    emit(state.copyWith(
-      isPlaying: true,
-    ));
   }
 
   Future<void> _playNextBackground(_PlayNextBackground event, Emitter<Test8State> emit) async {

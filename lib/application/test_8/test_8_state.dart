@@ -7,7 +7,6 @@ class Test8State with EquatableMixin {
   final bool showFeedback;
   final List<SoundEvent> soundEvents;
   final int errorsCount;
-  final bool isPlaying;
   final SoundEvent? activeSoundEvent;
 
   const Test8State({
@@ -17,7 +16,6 @@ class Test8State with EquatableMixin {
     required this.showFeedback,
     required this.soundEvents,
     required this.errorsCount,
-    required this.isPlaying,
     required this.activeSoundEvent,
   });
 
@@ -63,7 +61,6 @@ class Test8State with EquatableMixin {
       showFeedback: false,
       soundEvents: soundEvents,
       errorsCount: 0,
-      isPlaying: false,
       currentBackground: BackgroundSoundType.values.randomElement(),
       activeSoundEvent: soundEvents.first,
     );
@@ -72,12 +69,9 @@ class Test8State with EquatableMixin {
   Test8State copyWith({
     SoundType? selectedSound,
     int? remainingTime,
-    bool? isCompleted,
     bool? showFeedback,
     List<SoundEvent>? soundEvents,
-    int? currentSoundIndex,
     int? errorsCount,
-    bool? isPlaying,
     BackgroundSoundType? currentBackground,
     SoundEvent? activeSoundEvent,
   }) {
@@ -87,7 +81,6 @@ class Test8State with EquatableMixin {
       showFeedback: showFeedback ?? this.showFeedback,
       soundEvents: soundEvents ?? this.soundEvents,
       errorsCount: errorsCount ?? this.errorsCount,
-      isPlaying: isPlaying ?? this.isPlaying,
       currentBackground: currentBackground ?? this.currentBackground,
       activeSoundEvent: activeSoundEvent,
     );
@@ -103,7 +96,6 @@ class Test8State with EquatableMixin {
         soundEvents,
         activeSoundEvent,
         errorsCount,
-        isPlaying,
       ];
 }
 

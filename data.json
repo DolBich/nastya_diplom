@@ -467,6 +467,21 @@
     ]
   },
   "test9dataHistory": {
-    "test9": null
+    "test9": [
+      {
+        "data": {
+          "errorsCount": 0,
+          "duration": 122508111
+        },
+        "date": "2025-05-21T00:31:16.448062"
+      },
+      {
+        "data": {
+          "errorsCount": 9,
+          "duration": 119054683
+        },
+        "date": "2025-05-21T00:36:57.282052"
+      }
+    ]
   }
 }
