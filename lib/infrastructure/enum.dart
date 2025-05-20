@@ -1,6 +1,4 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:nastya_diplom/presentation/routes/router.dart';
-
 
 enum TestType {
   test1,
@@ -55,7 +53,7 @@ extension TestTypeX on TestType {
       case TestType.test7:
         return const Test7Route();
       case TestType.test8:
-        return Test1Route();
+        return const Test8Route();
       case TestType.test9:
         return Test1Route();
     }

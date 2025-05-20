@@ -435,7 +435,36 @@
     ]
   },
   "test8dataHistory": {
-    "test8": null
+    "test8": [
+      {
+        "data": {
+          "errorsCount": 3,
+          "duration": 122976759
+        },
+        "date": "2025-05-20T20:50:24.272576"
+      },
+      {
+        "data": {
+          "errorsCount": 2,
+          "duration": 120073579
+        },
+        "date": "2025-05-20T20:55:56.987853"
+      },
+      {
+        "data": {
+          "errorsCount": 4,
+          "duration": 120022814
+        },
+        "date": "2025-05-20T20:58:38.836091"
+      },
+      {
+        "data": {
+          "errorsCount": 0,
+          "duration": 120027760
+        },
+        "date": "2025-05-20T21:09:38.035073"
+      }
+    ]
   },
   "test9dataHistory": {
     "test9": null

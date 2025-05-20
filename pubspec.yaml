@@ -17,6 +17,8 @@ dependencies:
   equatable: ^2.0.7
   json_annotation: ^4.9.0
   flutter_bloc: ^9.1.1
+  audioplayers: ^4.1.0
+  path_provider: ^2.1.1
 
 
 
@@ -30,3 +32,16 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/sounds/background/sound1.mp3
+    - assets/sounds/background/sound2.mp3
+    - assets/sounds/background/sound3.mp3
+    - assets/sounds/background/sound4.mp3
+    - assets/sounds/background/sound5.mp3
+
+    - assets/sounds/events/sound1.mp3
+    - assets/sounds/events/sound2.wav
+    - assets/sounds/events/sound3.wav
+    - assets/sounds/events/sound4.wav
+    - assets/sounds/events/sound5.mp3
+    - assets/sounds/events/sound6.wav
