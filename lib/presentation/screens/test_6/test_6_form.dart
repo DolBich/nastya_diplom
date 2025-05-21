@@ -12,7 +12,7 @@ class Test6Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Тест "Перепутанные линии"'),
+        title: Text(TestType.test6.title),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test6Event.cancel());

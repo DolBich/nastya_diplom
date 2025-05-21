@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nastya_diplom/application/app_data/app_data_bloc.dart';
 import 'package:nastya_diplom/application/test_2/test_2_bloc.dart';
 import 'package:nastya_diplom/domain/test_2/cell.dart';
+import 'package:nastya_diplom/infrastructure/enum.dart';
 import 'package:nastya_diplom/presentation/routes/router.dart';
 import 'package:nastya_diplom/presentation/widgets/timer_indicator.dart';
 

@@ -10,7 +10,7 @@ class Test5Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Тест "Запомни и расставь точки"'),
+        title: Text(TestType.test5.title),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test5Event.cancel());

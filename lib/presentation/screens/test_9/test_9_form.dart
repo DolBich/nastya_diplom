@@ -9,7 +9,7 @@ class Test9Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Тест на многозадачность'),
+        title: Text(TestType.test9.title),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test9Event.cancel());

@@ -10,7 +10,7 @@ class Test4Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Тест Пьерона-Рузера'),
+        title: Text(TestType.test4.title),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test4Event.cancel());

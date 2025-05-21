@@ -12,7 +12,7 @@ class Test8Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Аудитивная концентрация'),
+        title: Text(TestType.test8.title),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test8Event.cancel());

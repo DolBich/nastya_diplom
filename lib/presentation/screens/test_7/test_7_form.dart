@@ -12,7 +12,7 @@ class Test7Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SCAAT (Визуальная версия)'),
+        title: Text(TestType.test7.title),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test7Event.cancel());
