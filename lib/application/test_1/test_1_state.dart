@@ -20,7 +20,7 @@ class Test1State with EquatableMixin {
     }
 
     final nonTargets = <int>{};
-    while (nonTargets.length < 45) {
+    while (nonTargets.length < 95) {
       final number = 100 + random.nextInt(899);
       if (!targetsSet.contains(number)) {
         nonTargets.add(number);
