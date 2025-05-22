@@ -12,7 +12,9 @@ import 'package:nastya_diplom/infrastructure/enum.dart';
 import 'package:nastya_diplom/main.dart';
 
 part 'app_history_event.dart';
+
 part 'app_history_state.dart';
+
 part 'app_history_bloc.g.dart';
 
 class AppHistoryBloc extends Bloc<AppHistoryEvent, AppHistoryState> {
@@ -31,15 +33,10 @@ class AppHistoryBloc extends Bloc<AppHistoryEvent, AppHistoryState> {
   }
 
   Future<void> _save(AppHistoryEvent event, Emitter<AppHistoryState> emit) async {
-    try {
-      final file = await saveJsonToFile(
-        jsonData: state.toJson(),
-        fileName: DATA_FILE_NAME,
-      );
-      print('Файл сохранен: ${file.path}');
-    } catch (e) {
-      print('Ошибка сохранения: $e');
-    }
+    await saveJsonToFile(
+      jsonData: state.toJson(),
+      fileName: DATA_FILE_NAME,
+    );
   }
 
   Future<File> saveJsonToFile({
@@ -59,9 +56,8 @@ class AppHistoryBloc extends Bloc<AppHistoryEvent, AppHistoryState> {
 
       final file = File('${directory.path}/$fileName');
       return await file.writeAsString(jsonString);
-
     } on IOException catch (e) {
-      throw Exception('Ошибка записи файла: ${e}');
+      throw Exception('Ошибка записи файла: $e');
     } on JsonUnsupportedObjectError catch (e) {
       throw Exception('Неподдерживаемый тип данных в JSON: ${e.unsupportedObject}');
     } catch (e) {

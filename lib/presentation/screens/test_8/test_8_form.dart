@@ -12,7 +12,10 @@ class Test8Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(TestType.test8.title),
+        title: Text(
+          TestType.test8.title,
+          style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),
+        ),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test8Event.cancel());
@@ -90,6 +93,7 @@ class _MainInteractionButton extends StatefulWidget {
 
 class _MainInteractionButtonState extends State<_MainInteractionButton> {
   int prevErrorsCount = 0;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<Test8Bloc, Test8State>(
@@ -98,7 +102,7 @@ class _MainInteractionButtonState extends State<_MainInteractionButton> {
         final bloc = context.read<Test8Bloc>();
         final isError = state.errorsCount > prevErrorsCount && state.showFeedback;
 
-        if(isError) {
+        if (isError) {
           prevErrorsCount = state.errorsCount;
         }
 
@@ -107,9 +111,7 @@ class _MainInteractionButtonState extends State<_MainInteractionButton> {
           width: 200,
           height: 200,
           decoration: BoxDecoration(
-            color: state.showFeedback
-                ? (isError ? Colors.red : Colors.green)
-                : Colors.blue,
+            color: state.showFeedback ? (isError ? Colors.red : Colors.green) : Colors.blue,
             shape: BoxShape.circle,
           ),
           child: Material(

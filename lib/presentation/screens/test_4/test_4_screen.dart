@@ -4,6 +4,7 @@ import 'package:nastya_diplom/application/app_data/app_data_bloc.dart';
 import 'package:nastya_diplom/application/test_4/test_4_bloc.dart';
 import 'package:nastya_diplom/domain/test_4/test_4_models.dart';
 import 'package:nastya_diplom/infrastructure/enum.dart';
+import 'package:nastya_diplom/main.dart';
 import 'package:nastya_diplom/presentation/routes/router.dart';
 import 'package:nastya_diplom/presentation/widgets/timer_indicator.dart';
 

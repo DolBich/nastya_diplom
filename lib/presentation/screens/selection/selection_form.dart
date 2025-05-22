@@ -16,7 +16,7 @@ class SelectionForm extends StatelessWidget {
             if(state.showHistory) {
               text = '$text (История)';
             }
-            return Text(text);
+            return Text(text, style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),);
           },
         ),
         actions: [

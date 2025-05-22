@@ -10,7 +10,7 @@ class Test4Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(TestType.test4.title),
+        title: Text(TestType.test4.title, style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test4Event.cancel());

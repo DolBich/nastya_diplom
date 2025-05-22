@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nastya_diplom/application/selection/selection_bloc.dart';
 import 'package:nastya_diplom/infrastructure/enum.dart';
+import 'package:nastya_diplom/main.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -15,7 +16,7 @@ class AppDrawer extends StatelessWidget {
           const DrawerHeader(
             child: Text(
               'Тесты',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: DEFAULT_TEXT_SIZE, fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
@@ -47,7 +48,7 @@ class _DrawerItem extends StatelessWidget {
         final isSelected = test == testType;
         return ListTile(
           leading: Icon(Icons.assignment, color: isSelected ? Theme.of(context).colorScheme.primary : null),
-          title: Text(testType.title),
+          title: Text(testType.title, style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),),
           selected: isSelected,
           selectedTileColor: Theme.of(context).colorScheme.surfaceContainerHighest,
           onTap: () {

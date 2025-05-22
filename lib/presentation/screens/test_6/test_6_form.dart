@@ -12,7 +12,7 @@ class Test6Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(TestType.test6.title),
+        title: Text(TestType.test6.title, style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test6Event.cancel());
@@ -172,7 +172,7 @@ class _NumberColumn extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.blue),
             ),
-            child: isLeft ? Text('${i + 1}') : _intForm(context, i),
+            child: isLeft ? Text('${i + 1}', style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),) : _intForm(context, i),
           );
         }),
       ),
@@ -211,20 +211,21 @@ class _TimerPanel extends StatelessWidget {
                 children: [
                   Text(
                     'Осталось времени:',
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: DEFAULT_TEXT_SIZE),
                   ),
                   AnimatedSwitcher(
                     duration: const Duration(milliseconds: 300),
                     child: state.isCompleted
                         ? const Text(
                             'Завершено',
-                            style: TextStyle(color: Colors.green),
+                            style: TextStyle(color: Colors.green, fontSize: DEFAULT_TEXT_SIZE,),
                           )
                         : Text(
                             '$minutes:$seconds',
                             style: TextStyle(
                               color: _getTimeColor(remaining),
                               fontWeight: FontWeight.bold,
+                              fontSize: DEFAULT_TEXT_SIZE
                             ),
                           ),
                   ),
@@ -262,7 +263,7 @@ class _FloatingControlButton extends StatelessWidget {
         return FloatingActionButton.extended(
           onPressed: () =>
               context.read<Test6Bloc>().add(state.isCompleted ? const Test6Event.save() : const Test6Event.complete()),
-          label: Text(state.isCompleted ? 'Продолжить' : 'Завершить'),
+          label: Text(state.isCompleted ? 'Продолжить' : 'Завершить', style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),),
           icon: Icon(state.isCompleted ? Icons.arrow_forward : Icons.check),
         );
       },

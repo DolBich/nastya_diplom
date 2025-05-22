@@ -6,7 +6,6 @@ class AudioPlayerService {
   final AudioPlayer _effectsPlayer = AudioPlayer()..setVolume(0.2);
 
   Stream<PlayerState> playSound(SoundType type) {
-    print('play $type');
       _effectsPlayer.play(AssetSource(type.assetPath));
       return _effectsPlayer.onPlayerStateChanged;
   }

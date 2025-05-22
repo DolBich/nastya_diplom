@@ -15,7 +15,10 @@ class ProfileForm extends StatelessWidget {
       title: BlocSelector<ProfileBloc, ProfileState, DateTime?>(
         selector: (state) => state.birthDate,
         builder: (context, date) {
-          return Text('Дата рождения: ${dateFormat.formatOrNull(date) ?? ' - '}');
+          return Text(
+            'Дата рождения: ${dateFormat.formatOrNull(date) ?? ' - '}',
+            style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),
+          );
         },
       ),
       onTap: () async {
@@ -53,7 +56,10 @@ class ProfileForm extends StatelessWidget {
         return Opacity(
           opacity: !enableSave ? 0.5 : 1,
           child: FloatingActionButton.extended(
-            label: const Text('Сохранить'),
+            label: const Text(
+              'Сохранить',
+              style: TextStyle(fontSize: DEFAULT_TEXT_SIZE),
+            ),
             onPressed: enableSave
                 ? () {
                     bloc.add(const ProfileEvent.save());
@@ -66,12 +72,23 @@ class ProfileForm extends StatelessWidget {
     );
   }
 
+  Widget get _saveInstruction {
+    return const Text(
+      'Для отправки данных о вашей учётной записи психологу откройте папку, в которой находится это приложение,'
+      ' скопируйте файл data.json, и отправьте его ему',
+      style: TextStyle(fontSize: DEFAULT_TEXT_SIZE),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<ProfileBloc>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Профиль'),
+        title: const Text(
+          'Профиль',
+          style: TextStyle(fontSize: DEFAULT_TEXT_SIZE),
+        ),
       ),
       floatingActionButton: _floatingActionButton(bloc),
       body: ListView(
@@ -87,6 +104,10 @@ class ProfileForm extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: _birthDate(bloc, context),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _saveInstruction,
           ),
         ],
       ),

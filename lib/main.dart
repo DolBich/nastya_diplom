@@ -1,7 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nastya_diplom/application/app_data/app_data_bloc.dart';
@@ -14,6 +10,8 @@ void main() async {
   final json = await loadFromFile(DATA_FILE_NAME);
   runApp(MyApp(json: json));
 }
+
+const double DEFAULT_TEXT_SIZE = 16;
 
 const DATA_FILE_NAME = 'data.json';
 

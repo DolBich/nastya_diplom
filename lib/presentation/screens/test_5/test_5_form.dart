@@ -10,7 +10,7 @@ class Test5Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(TestType.test5.title),
+        title: Text(TestType.test5.title, style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test5Event.cancel());
@@ -93,7 +93,7 @@ class _PhaseIndicatorState extends State<_PhaseIndicator> {
           children: [
             Text(
               _getPhaseTitle(state.phase),
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             LinearProgressIndicator(
@@ -105,7 +105,7 @@ class _PhaseIndicatorState extends State<_PhaseIndicator> {
             ),
             Text(
               'Осталось: ${remainingSeconds.clamp(0, state.phase.duration.inSeconds)} сек',
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),
             ),
           ],
         );

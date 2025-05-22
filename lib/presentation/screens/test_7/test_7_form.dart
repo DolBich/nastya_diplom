@@ -12,7 +12,7 @@ class Test7Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(TestType.test7.title),
+        title: Text(TestType.test7.title, style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test7Event.cancel());
@@ -55,7 +55,7 @@ class Test7ImageWidget extends StatelessWidget {
       children: [
         const Text(
           'Соответствует ли этот символ показанному 2-мя шагами ранее',
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: DEFAULT_TEXT_SIZE),
         ),
         BlocBuilder<Test7Bloc, Test7State>(
           buildWhen: (p, c) => p.currentIndex != c.currentIndex || p.images != c.images,
@@ -90,7 +90,7 @@ class Test7ImageWidget extends StatelessWidget {
       children: [
         const Text(
           'Это начало ряда символов, которые надо запомнить (первый тот, что слева)',
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: DEFAULT_TEXT_SIZE),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -176,7 +176,7 @@ class _ProgressBars extends StatelessWidget {
       builder: (context, remainingTime) {
         return Text(
           'Осталось: ${remainingTime ~/ 60}:${(remainingTime % 60).toString().padLeft(2, '0')}',
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: DEFAULT_TEXT_SIZE),
         );
       },
     );

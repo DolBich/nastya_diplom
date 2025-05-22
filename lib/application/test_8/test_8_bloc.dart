@@ -153,6 +153,7 @@ class Test8Bloc extends Bloc<Test8Event, Test8State> {
   }
 
   Future<void> _cancel(_Cancel event, Emitter<Test8State> emit) async {
+    audioService.dispose();
     timer.dispose();
   }
 }

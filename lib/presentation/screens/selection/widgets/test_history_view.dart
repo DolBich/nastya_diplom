@@ -5,6 +5,7 @@ import 'package:nastya_diplom/application/app_history/app_history_bloc.dart';
 import 'package:nastya_diplom/domain/data/test_data.dart';
 import 'package:nastya_diplom/domain/history/history_unit.dart';
 import 'package:nastya_diplom/infrastructure/enum.dart';
+import 'package:nastya_diplom/main.dart';
 import 'package:nastya_diplom/presentation/widgets/result_widget.dart';
 
 class TestHistoryView extends StatelessWidget {
@@ -42,7 +43,7 @@ class TestHistoryView extends StatelessWidget {
         for (final prop in state.props) {
           if (prop is Map) {
             if (prop.keys.first == test) {
-              history = prop.values.first;
+              history = prop.values.first ?? [];
             }
           }
         }
@@ -91,12 +92,13 @@ class _AttemptHeader extends StatelessWidget {
           'Попытка №${index + 1}',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
+            fontSize: DEFAULT_TEXT_SIZE,
               ),
         ),
         const Spacer(),
         Text(
           DateFormat('dd.MM.yyyy HH:mm').format(attempt.date),
-          style: Theme.of(context).textTheme.bodySmall,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: DEFAULT_TEXT_SIZE),
         ),
       ],
     );

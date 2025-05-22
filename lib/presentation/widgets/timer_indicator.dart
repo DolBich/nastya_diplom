@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nastya_diplom/application/timer.dart';
+import 'package:nastya_diplom/main.dart';
 
 class TimerIndicator extends StatefulWidget {
   final TimerService timer;
@@ -59,7 +60,7 @@ class _TimerTextState extends State<_TimerText> {
   Widget build(BuildContext context) {
     return Text(
       _formatDuration(duration),
-      style: const TextStyle(fontSize: 16),
+      style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),
     );
   }
 

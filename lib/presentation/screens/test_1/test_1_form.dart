@@ -10,7 +10,7 @@ class Test1Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(TestType.test1.title),
+        title: Text(TestType.test1.title, style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test1Event.cancel());
@@ -36,7 +36,7 @@ class Test1Form extends StatelessWidget {
           children: [
             const _TargetNumbersPanel(),
             SizedBox.square(
-              dimension: 500,
+              dimension: 550,
               child: _NumberGrid(),
             ),
           ],
@@ -110,6 +110,7 @@ class _NumberCell extends StatelessWidget {
           style: TextStyle(
             color: number.isFound ? Colors.blue : Colors.black,
             fontWeight: !inGrid ? FontWeight.bold : FontWeight.normal,
+            fontSize: DEFAULT_TEXT_SIZE,
           ),
         );
 

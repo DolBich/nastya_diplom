@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nastya_diplom/infrastructure/enum.dart';
+import 'package:nastya_diplom/main.dart';
 import 'package:nastya_diplom/presentation/routes/router.dart';
 
 class InstructionView extends StatelessWidget {
@@ -22,7 +23,7 @@ class InstructionView extends StatelessWidget {
               testType.instructionText,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 height: 1.5,
-                fontSize: 16.0,
+                fontSize: DEFAULT_TEXT_SIZE,
               ),
               textAlign: TextAlign.justify,
               softWrap: true,
@@ -50,7 +51,7 @@ class InstructionView extends StatelessWidget {
             child: const Text(
               'Начать тест',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: DEFAULT_TEXT_SIZE,
                 fontWeight: FontWeight.w600,
               ),
             ),

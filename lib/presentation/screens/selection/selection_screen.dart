@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nastya_diplom/application/app_history/app_history_bloc.dart';
 import 'package:nastya_diplom/application/selection/selection_bloc.dart';
 import 'package:nastya_diplom/infrastructure/enum.dart';
+import 'package:nastya_diplom/main.dart';
 import 'package:nastya_diplom/presentation/routes/router.dart';
 import 'package:nastya_diplom/presentation/screens/selection/widgets/app_drawer.dart';
 import 'package:nastya_diplom/presentation/screens/selection/widgets/instruction_view.dart';

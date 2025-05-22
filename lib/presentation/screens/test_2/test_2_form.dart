@@ -10,7 +10,7 @@ class Test2Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(TestType.test2.title),
+        title: Text(TestType.test2.title, style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test2Event.cancel());
@@ -128,9 +128,9 @@ class _CellContent extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontWeight: FontWeight.bold,
-        fontSize: cell.showCorrect || cell.showError ? 18 : 16,
+        fontSize: cell.showCorrect || cell.showError ? 18 : DEFAULT_TEXT_SIZE,
       ),
-      child: Text('${cell.number}'),
+      child: Text('${cell.number}', style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),),
     );
   }
 }

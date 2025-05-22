@@ -51,128 +51,123 @@ class Test6State with EquatableMixin {
     required int rightIndex,
     required Random random,
   }) {
-    try {
-      const middleWidth = 500.0;
-      const rowHeight = 25.0;
-      const maxHeight = 25 * rowHeight;
-      const edgePadding = 20.0; // Отступ от границ
+    const middleWidth = 500.0;
+    const rowHeight = 25.0;
+    const maxHeight = 25 * rowHeight;
+    const edgePadding = 20.0; // Отступ от границ
 
-      final start = Offset(0, leftIndex * rowHeight + rowHeight / 2);
-      final end = Offset(middleWidth, rightIndex * rowHeight + rowHeight / 2);
+    final start = Offset(0, leftIndex * rowHeight + rowHeight / 2);
+    final end = Offset(middleWidth, rightIndex * rowHeight + rowHeight / 2);
 
-      final segments = 3 + random.nextInt(2);
-      final path = Path();
-      path.moveTo(start.dx, start.dy);
+    final segments = 3 + random.nextInt(2);
+    final path = Path();
+    path.moveTo(start.dx, start.dy);
 
-      final segmentFractions = List.generate(segments, (_) => random.nextDouble());
-      final totalFraction = segmentFractions.reduce((a, b) => a + b);
-      var segmentWidths = segmentFractions.map((f) => f * middleWidth / totalFraction).toList();
+    final segmentFractions = List.generate(segments, (_) => random.nextDouble());
+    final totalFraction = segmentFractions.reduce((a, b) => a + b);
+    var segmentWidths = segmentFractions.map((f) => f * middleWidth / totalFraction).toList();
 
-      // Корректировка последнего сегмента
-      segmentWidths[segmentWidths.length - 1] = segmentFractions.last * middleWidth / totalFraction - edgePadding;
+    // Корректировка последнего сегмента
+    segmentWidths[segmentWidths.length - 1] = segmentFractions.last * middleWidth / totalFraction - edgePadding;
 
-      double currentX = 0;
-      final controlPoints = <Offset>[];
-      double prevY = start.dy;
+    double currentX = 0;
+    final controlPoints = <Offset>[];
+    double prevY = start.dy;
 
-      for (var i = 0; i < segments; i++) {
-        final segmentWidth = segmentWidths[i];
-        final isLastSegment = i == segments - 1;
-        final isFirstSegment = i == 0;
+    for (var i = 0; i < segments; i++) {
+      final segmentWidth = segmentWidths[i];
+      final isLastSegment = i == segments - 1;
+      final isFirstSegment = i == 0;
 
-        // Ограничение вертикального отклонения
-        const maxVerticalDeviation = 350;
-        double deviation = (random.nextDouble() * 2 - 1) * maxVerticalDeviation;
+      // Ограничение вертикального отклонения
+      const maxVerticalDeviation = 350;
+      double deviation = (random.nextDouble() * 2 - 1) * maxVerticalDeviation;
 
-        // Плавное изменение направления
-        if (i > 0) {
-          final prevDeviation = controlPoints.last.dy - prevY;
-          deviation = prevDeviation * 0.3 + deviation * 0.7;
-        }
-
-        // Расчет базовой позиции
-        final targetY = start.dy + (end.dy - start.dy) * (currentX + segmentWidth) / middleWidth;
-        final baseY = prevY + (targetY - prevY) * 0.6;
-
-        // Горизонтальное отклонение (может быть отрицательным)
-        double horizontalDeviation = random.nextDouble() * 150 - 250;
-        if (isFirstSegment || isLastSegment) {
-          horizontalDeviation = 0;
-          deviation = 0;
-        }
-
-        // Тип кривой
-        final curveType = random.nextInt(5);
-        var (ctrl1, ctrl2) = switch (curveType) {
-          0 => _createSmoothCurve(currentX, baseY, segmentWidth, horizontalDeviation, deviation),
-          1 => _createReverseCurve(currentX, baseY, segmentWidth, horizontalDeviation, deviation),
-          2 => _createSpiralCurve(currentX, baseY, segmentWidth, horizontalDeviation, deviation),
-          3 => _createStepCurve(currentX, baseY, segmentWidth, horizontalDeviation, deviation),
-          _ => _createRandomCurve(currentX, baseY, segmentWidth, horizontalDeviation, deviation),
-        };
-
-        // Корректировка последних контрольных точек
-        if (isLastSegment) {
-          ctrl2 = Offset(
-            (currentX + segmentWidth).clamp(currentX + segmentWidth - edgePadding, middleWidth - edgePadding),
-            ctrl2.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
-          );
-        }
-
-        if (isFirstSegment) {
-          ctrl2 = Offset(
-            (currentX + segmentWidth).clamp(edgePadding, currentX + segmentWidth + edgePadding),
-            ctrl2.dy,
-          );
-        }
-
-        if (isFirstSegment) {
-          path.cubicTo(
-            ctrl1.dx,
-            ctrl1.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
-            ctrl2.dx.clamp(edgePadding, middleWidth),
-            ctrl2.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
-            (currentX + segmentWidth + edgePadding).clamp(edgePadding, middleWidth),
-            baseY.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
-          );
-        } else if (isLastSegment) {
-          path.cubicTo(
-            ctrl1.dx,
-            ctrl1.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
-            ctrl2.dx.clamp(0, currentX - edgePadding + segmentWidth),
-            ctrl2.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
-            (currentX + segmentWidth - edgePadding).clamp(0, middleWidth - edgePadding),
-            baseY.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
-          );
-        } else {
-          path.cubicTo(
-            ctrl1.dx,
-            ctrl1.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
-            ctrl2.dx.clamp(currentX, currentX + segmentWidth),
-            ctrl2.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
-            currentX + segmentWidth,
-            baseY.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
-          );
-        }
-
-        controlPoints.addAll([ctrl1, ctrl2]);
-        prevY = baseY;
-        currentX += segmentWidth;
+      // Плавное изменение направления
+      if (i > 0) {
+        final prevDeviation = controlPoints.last.dy - prevY;
+        deviation = prevDeviation * 0.3 + deviation * 0.7;
       }
 
-      path.lineTo(end.dx, end.dy);
+      // Расчет базовой позиции
+      final targetY = start.dy + (end.dy - start.dy) * (currentX + segmentWidth) / middleWidth;
+      final baseY = prevY + (targetY - prevY) * 0.6;
 
-      return ConnectionLine(
-        leftIndex: leftIndex + 1,
-        rightIndex: rightIndex + 1,
-        path: path,
-        answer: null,
-        controlPoints: controlPoints,
-      );
-    } catch (e) {
-      print(e);
-      return null;
+      // Горизонтальное отклонение (может быть отрицательным)
+      double horizontalDeviation = random.nextDouble() * 150 - 250;
+      if (isFirstSegment || isLastSegment) {
+        horizontalDeviation = 0;
+        deviation = 0;
+      }
+
+      // Тип кривой
+      final curveType = random.nextInt(5);
+      var (ctrl1, ctrl2) = switch (curveType) {
+        0 => _createSmoothCurve(currentX, baseY, segmentWidth, horizontalDeviation, deviation),
+        1 => _createReverseCurve(currentX, baseY, segmentWidth, horizontalDeviation, deviation),
+        2 => _createSpiralCurve(currentX, baseY, segmentWidth, horizontalDeviation, deviation),
+        3 => _createStepCurve(currentX, baseY, segmentWidth, horizontalDeviation, deviation),
+        _ => _createRandomCurve(currentX, baseY, segmentWidth, horizontalDeviation, deviation),
+      };
+
+      // Корректировка последних контрольных точек
+      if (isLastSegment) {
+        ctrl2 = Offset(
+          (currentX + segmentWidth).clamp(currentX + segmentWidth - edgePadding, middleWidth - edgePadding),
+          ctrl2.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
+        );
+      }
+
+      if (isFirstSegment) {
+        ctrl2 = Offset(
+          (currentX + segmentWidth).clamp(edgePadding, currentX + segmentWidth + edgePadding),
+          ctrl2.dy,
+        );
+      }
+
+      if (isFirstSegment) {
+        path.cubicTo(
+          ctrl1.dx,
+          ctrl1.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
+          ctrl2.dx.clamp(edgePadding, middleWidth),
+          ctrl2.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
+          (currentX + segmentWidth + edgePadding).clamp(edgePadding, middleWidth),
+          baseY.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
+        );
+      } else if (isLastSegment) {
+        path.cubicTo(
+          ctrl1.dx,
+          ctrl1.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
+          ctrl2.dx.clamp(0, currentX - edgePadding + segmentWidth),
+          ctrl2.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
+          (currentX + segmentWidth - edgePadding).clamp(0, middleWidth - edgePadding),
+          baseY.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
+        );
+      } else {
+        path.cubicTo(
+          ctrl1.dx,
+          ctrl1.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
+          ctrl2.dx.clamp(currentX, currentX + segmentWidth),
+          ctrl2.dy.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
+          currentX + segmentWidth,
+          baseY.clamp(rowHeight / 2.1, maxHeight - rowHeight / 2.1),
+        );
+      }
+
+      controlPoints.addAll([ctrl1, ctrl2]);
+      prevY = baseY;
+      currentX += segmentWidth;
     }
+
+    path.lineTo(end.dx, end.dy);
+
+    return ConnectionLine(
+      leftIndex: leftIndex + 1,
+      rightIndex: rightIndex + 1,
+      path: path,
+      answer: null,
+      controlPoints: controlPoints,
+    );
   }
 
 // Новые типы кривых

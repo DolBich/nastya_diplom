@@ -10,7 +10,7 @@ class Test3Form extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(TestType.test3.title),
+        title: Text(TestType.test3.title, style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),),
         leading: IconButton(
           onPressed: () {
             bloc.add(const Test3Event.cancel());
@@ -94,7 +94,7 @@ class _GridCell extends StatelessWidget {
                   cell.number.toString(),
                   style: TextStyle(
                     color:_getTextColor(cell),
-                    fontSize: 18,
+                    fontSize: DEFAULT_TEXT_SIZE,
                   ),
                 ),
               ),
