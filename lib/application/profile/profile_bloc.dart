@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nastya_diplom/application/app_data/app_data_bloc.dart';
 import 'package:nastya_diplom/application/app_history/app_history_bloc.dart';
-import 'package:nastya_diplom/domain/profile.dart';
+import 'package:nastya_diplom/domain/profile/profile.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';

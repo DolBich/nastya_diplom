@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:nastya_diplom/application/app_data/app_data_bloc.dart';
 import 'package:nastya_diplom/domain/data/test_data.dart';
 import 'package:nastya_diplom/domain/history/history_unit.dart';
-import 'package:nastya_diplom/domain/profile.dart';
+import 'package:nastya_diplom/domain/profile/profile.dart';
 import 'package:nastya_diplom/infrastructure/enum.dart';
 import 'package:nastya_diplom/main.dart';
 

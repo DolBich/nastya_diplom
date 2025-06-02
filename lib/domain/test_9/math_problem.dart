@@ -40,7 +40,7 @@ extension MathProblemTypeX on MathProblemType {
         );
       case MathProblemType.division:
         final a = 10 + random.nextInt(50);
-        final b = random.nextInt(10);
+        final b = 1 + random.nextInt(9);
         return MathProblem(
           question: '$a / $b = ? (Ответ целое число в нижнюю сторону)',
           correctAnswer: a ~/ b,
