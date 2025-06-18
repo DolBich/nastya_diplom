@@ -20,15 +20,46 @@
     "test5": null
   },
   "test6dataHistory": {
-    "test6": null
+    "test6": [
+      {
+        "data": {
+          "errorsCount": 22,
+          "duration": 61826306
+        },
+        "date": "2025-06-15T15:06:44.960943"
+      }
+    ]
   },
   "test7dataHistory": {
-    "test7": null
+    "test7": [
+      {
+        "data": {
+          "errorsCount": 8,
+          "duration": 26978726
+        },
+        "date": "2025-06-15T15:08:39.258397"
+      },
+      {
+        "data": {
+          "errorsCount": 8,
+          "duration": 26982670
+        },
+        "date": "2025-06-15T15:08:39.260391"
+      }
+    ]
   },
   "test8dataHistory": {
     "test8": null
   },
   "test9dataHistory": {
-    "test9": null
+    "test9": [
+      {
+        "data": {
+          "errorsCount": 3,
+          "duration": 45649740
+        },
+        "date": "2025-06-15T15:10:31.726577"
+      }
+    ]
   }
 }

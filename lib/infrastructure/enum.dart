@@ -16,11 +16,11 @@ extension TestTypeX on TestType {
   String get title {
     switch (this) {
       case TestType.test1:
-        return 'Тест Торндайка';
+        return 'Тест 1';
       case TestType.test2:
-        return 'Тест Шульте';
+        return 'Тест 2';
       case TestType.test3:
-        return 'Тест Шульте-Горбова';
+        return 'Тест 3';
       case TestType.test4:
         return 'Тест Пьерона-Рузера';
       case TestType.test5:
