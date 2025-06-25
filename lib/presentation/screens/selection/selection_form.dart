@@ -3,6 +3,15 @@ part of 'selection_screen.dart';
 class SelectionForm extends StatelessWidget {
   const SelectionForm({super.key});
 
+  Widget _floatingActionButton(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        context.router.navigate(const CustomNameRoute());
+      },
+      child: const Icon(Icons.send_outlined),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<SelectionBloc>();
@@ -13,33 +22,36 @@ class SelectionForm extends StatelessWidget {
             String text = '';
             final test = state.testType;
             text = test.title;
-            if(state.showHistory) {
+            if (state.showHistory) {
               text = '$text (История)';
             }
-            return Text(text, style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),);
+            return Text(
+              text,
+              style: const TextStyle(fontSize: DEFAULT_TEXT_SIZE),
+            );
           },
         ),
         actions: [
           IconButton(
             icon: BlocSelector<SelectionBloc, SelectionState, bool>(
-              selector: (state) => state.showHistory,
-              builder: (context, showHistory) {
-                return showHistory ? const Icon(Icons.text_fields_outlined) : const Icon(Icons.history);
-              }
-            ),
+                selector: (state) => state.showHistory,
+                builder: (context, showHistory) {
+                  return showHistory ? const Icon(Icons.text_fields_outlined) : const Icon(Icons.history);
+                }),
             onPressed: () => bloc.add(const SelectionEvent.updateShowHistory()),
           ),
           IconButton(
-            icon:  const Icon(Icons.account_box_outlined),
+            icon: const Icon(Icons.account_box_outlined),
             onPressed: () {
               context.router.navigate(const ProfileRoute());
             },
           ),
         ],
       ),
+      floatingActionButton: _floatingActionButton(context),
       drawer: const AppDrawer(),
       body: BlocBuilder<SelectionBloc, SelectionState>(builder: (context, state) {
-        if(state.showHistory) {
+        if (state.showHistory) {
           return TestHistoryView(test: state.testType);
         }
 

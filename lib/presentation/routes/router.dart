@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nastya_diplom/application/selection/selection_bloc.dart';
+import 'package:nastya_diplom/presentation/screens/custom/custom_screen.dart';
 import 'package:nastya_diplom/presentation/screens/profile/profile_screen.dart';
 import 'package:nastya_diplom/presentation/screens/selection/selection_screen.dart';
 import 'package:nastya_diplom/presentation/screens/test_1/test_1_screen.dart';
@@ -66,6 +67,11 @@ class AppRouter extends RootStackRouter {
         CustomRoute(
           page: Test9Route.page,
           path: '/test9',
+        ),
+
+        CustomRoute(
+          page: CustomNameRoute.page,
+          path: '/custom',
         ),
 
         CustomRoute(

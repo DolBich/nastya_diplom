@@ -11,6 +11,22 @@
 part of 'router.dart';
 
 /// generated route for
+/// [CustomNameScreen]
+class CustomNameRoute extends PageRouteInfo<void> {
+  const CustomNameRoute({List<PageRouteInfo>? children})
+    : super(CustomNameRoute.name, initialChildren: children);
+
+  static const String name = 'CustomNameRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CustomNameScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [ProfileScreen]
 class ProfileRoute extends PageRouteInfo<void> {
   const ProfileRoute({List<PageRouteInfo>? children})
